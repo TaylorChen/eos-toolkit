@@ -6,6 +6,7 @@ get_config="${work_home}/config/config.sh"
 logger="python ${work_home}/utils/logger.py"
 backup_days=$(${get_config} "backup_max_days")
 backup_folder=$(${get_config} "backup_home")
+backup_status=$(${get_config} "backup_status_file")
 
 indexes_folder="${backup_folder}/indexes"
 chunks_folder="${backup_folder}/chunks"
@@ -74,6 +75,10 @@ clear_history_indexes() {
 }
 
 remove_backup_history() {
+    if [ -f ${backup_status} ];then
+        log "backup processing, skip remove history"
+        exit
+    fi
     clear_history_indexes
     clear_history_chunks
 }

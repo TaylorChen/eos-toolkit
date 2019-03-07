@@ -41,6 +41,11 @@ def data_backup_handler():
     subprocess.call(data_backup_command)
 
 
+def backup_clear_history():
+    backup_clear_history_command = str(work_home) + '/backup/backup_remove_history.sh'
+    subprocess.call(backup_clear_history_command)
+
+
 def backup_job_init():
     if not BackupConfig.enable():
         return
@@ -80,6 +85,8 @@ def init_jobs():
 
     enable, cron = MonitorConfig.blacklist_monitor()
     add_job(blacklist_monitor, enable, cron, 'blacklist_monitor')
+
+    sched.add_job(backup_clear_history, 'cron', hour=9, minute=0, second=5, id='backup_clear_history')
 
     sched.add_job(eos_log_handler, 'cron', hour=0, minute=0, second=5, id='eos_log_handler')
     backup_job_init()
