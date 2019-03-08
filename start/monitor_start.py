@@ -54,6 +54,7 @@ def backup_job_init():
         sched.add_job(backup.restore.main, 'cron', hour=backup_interval_hour, minute=59, second=0, id='backup_restore')
     else:
         sched.add_job(data_backup_handler, 'cron', hour=backup_interval_hour, minute=2, second=0, id='backup')
+    sched.add_job(backup_clear_history, 'cron', hour=9, minute=0, second=5, id='backup_clear_history')
 
 
 def blacklist_monitor():
@@ -85,8 +86,6 @@ def init_jobs():
 
     enable, cron = MonitorConfig.blacklist_monitor()
     add_job(blacklist_monitor, enable, cron, 'blacklist_monitor')
-
-    sched.add_job(backup_clear_history, 'cron', hour=9, minute=0, second=5, id='backup_clear_history')
 
     sched.add_job(eos_log_handler, 'cron', hour=0, minute=0, second=5, id='eos_log_handler')
     backup_job_init()
