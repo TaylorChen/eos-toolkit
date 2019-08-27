@@ -9,6 +9,7 @@ init_config() {
     api=$(${get_config} "local_api")
     eos_home=$(${get_config} "eos_home")
     data_home="${eos_home}/data"
+    backup_data_home=$(${get_config} "backup_home")
 
     stop_command="${work_home}/node/stop.sh"
     start_command="${work_home}/node/start.sh"
@@ -56,7 +57,7 @@ backup() {
         clear_backup_status
         exit 1
     fi
-    ${pitreos} backup ${data_home} -s "file:///mnt/.pitreos/backups" 2>&1 >> ${log_file}
+    ${pitreos} backup ${data_home} -s "file://${backup_data_home}" 2>&1 >> ${log_file}
     if [ $? == 0 ]; then
         log "backup success"
     else
