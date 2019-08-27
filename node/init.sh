@@ -39,7 +39,7 @@ get_code() {
 main() {
   init_folder
   init_config
-  get_code
+  # get_code
 }
 
 main

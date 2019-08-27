@@ -1,6 +1,6 @@
 #!/bin/bash
 
-pitreos="/usr/local/go/bin/pitreos"
+pitreos="/mnt/eosbp/command/pitreos"
 
 init_config() {
     backup_home=$(cd `dirname $0`;pwd)
@@ -56,7 +56,7 @@ backup() {
         clear_backup_status
         exit 1
     fi
-    ${pitreos} backup ${data_home} 2>&1 >> ${log_file}
+    ${pitreos} backup ${data_home} -s "file:///mnt/.pitreos/backups" 2>&1 >> ${log_file}
     if [ $? == 0 ]; then
         log "backup success"
     else
