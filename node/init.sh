@@ -32,8 +32,12 @@ init_config() {
 
 get_code() {
     cd ${eos_home}
-    git clone https://github.com/EOSIO/eos.git
-    ${build_command} ${tag}
+    if [ ! -d ${current_home}/eos_"${tag}" ]; then
+        cp ${current_home}/eos_"${tag}"/* $command_dir/.
+    else
+        git clone https://github.com/EOSIO/eos.git
+        ${build_command} ${tag}
+    fi
 }
 
 main() {
