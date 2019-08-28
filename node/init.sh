@@ -32,7 +32,7 @@ init_config() {
 
 get_code() {
     cd ${eos_home}
-    git clone https://github.com/EOS-Mainnet/eos.git
+    git clone https://github.com/EOSIO/eos.git
     ${build_command} ${tag}
 }
 

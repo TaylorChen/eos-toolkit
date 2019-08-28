@@ -41,7 +41,7 @@ make_eos() {
   check_tag
   go_eosio_home
   clear_build_home
-  ${eosio_home}/eosio_build.sh -s EOS
+  ${eosio_home}/scripts/eosio_build.sh -s EOS
   [ 0 != $? ] && log "eosio_build failed." && exit 1
   [ ! -d build ] && log "build not exists." && exit 1
   go_build_home
