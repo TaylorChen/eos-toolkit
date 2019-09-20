@@ -5,7 +5,7 @@ hostname = '[hostname:%s lambda_missed_blocks_alarm]' % socket.gethostname()
 
 def_headers = {'Content-Type': 'application/json'}
 def_timeout = 30
-miss_block_alarm_num = 0
+miss_block_alarm_num = 2
 
 token = ""
 show_validator = ""
